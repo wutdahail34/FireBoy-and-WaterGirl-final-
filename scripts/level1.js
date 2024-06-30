@@ -41,10 +41,10 @@ class level1 extends Phaser.Scene {
       this.coins = this.physics.add.group();
       this.coins2 = this.physics.add.group(); 
   
-      const groundLevel = this.cameras.main.height - 32;
+      const groundLevel = this.cameras.main.height - 450;
   
       this.character1 = this.physics.add
-        .sprite(100, groundLevel, "character1")
+        .sprite(190, groundLevel, "character1")
         .setOrigin(0.5, 1)
         .setCollideWorldBounds(true)
         .setBounce(0.2)
@@ -166,7 +166,7 @@ class level1 extends Phaser.Scene {
       this.theme.stop();
       this.theme.play({
         mute: false,
-        volume: 0.25,
+        volume: 0.1,
         rate: 1,
         detune: 0,
         seek: 0,

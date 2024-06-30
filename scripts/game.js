@@ -5,6 +5,9 @@ import NextLevel from "./next.js";
 import GameStart from "./start.js";
 
 class Generator {
+
+
+
   constructor(scene) {
       this.scene = scene;
       this.scene.time.delayedCall(2000, () => this.init(), null, this);
@@ -31,6 +34,8 @@ class Generator {
       );
   }
 }
+
+
 
 
 class Coin extends Phaser.GameObjects.Sprite {
@@ -65,6 +70,9 @@ class Coin extends Phaser.GameObjects.Sprite {
       this.play({ key: "coin", repeat: -1 });
   }
 }
+
+
+
 
 var config = {
   type: Phaser.AUTO,
