@@ -1,4 +1,8 @@
+import GameOver from "./end.js";
 import level1 from "./level1.js";
+import level2 from "./level2.js";
+import NextLevel from "./next.js";
+import GameStart from "./start.js";
 
 class Generator {
   constructor(scene) {
@@ -62,7 +66,6 @@ class Coin extends Phaser.GameObjects.Sprite {
   }
 }
 
-
 var config = {
   type: Phaser.AUTO,
   width: 640,
@@ -75,7 +78,7 @@ var config = {
       debug: true,
     },
   },
-  scene: [level1],
+  scene: [GameStart, level1, NextLevel, level2, GameOver],
 };
 
 var game = new Phaser.Game(config);
