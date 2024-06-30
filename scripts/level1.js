@@ -114,21 +114,33 @@ class level1 extends Phaser.Scene {
   
       this.createCoins();
     }
+
+
   
     createCoins() {
+      let coinsX = [250, 320 , 390 , 250, 350 ,450, 650 , 400 , 300, 200 ]
+      let coinsY = [460, 460, 460, 460, 200, 200, 200, 200, 200,]
+
+
       for (let i = 0; i < 10; i++) {
-        const x = Phaser.Math.Between(100, 800);
-        const y = Phaser.Math.Between(100, 600);
+        const x = coinsX[i];
+        const y = coinsY[i];
         const coin = this.coins.create(x, y, "coin");
         coin.body.allowGravity = false;
       }
+
       for (let i = 0; i < 10; i++) {
-        const x = Phaser.Math.Between(100, 800);
-        const y = Phaser.Math.Between(100, 600);
+        const x = coinsX[i];
+        const y = coinsY[i];
         const coin2 = this.coins2.create(x, y, "coin2");
         coin2.body.allowGravity = false;
       }
+
+
     }
+
+
+
   
     hitCoin(player, coin) {
       this.playAudio("coin");
