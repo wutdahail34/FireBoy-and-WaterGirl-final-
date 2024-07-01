@@ -1,10 +1,10 @@
 import GameOver from "./end.js";
-import level1 from "./level1.js";
-import level2 from "./level2.js";
+import GameLevel from "./level1.js";
+//import level2 from "./level2.js";
 import NextLevel from "./next.js";
 import GameStart from "./start.js";
 
-class Generator {
+/*class Generator {
 
 
 
@@ -33,7 +33,7 @@ class Generator {
           this
       );
   }
-}
+}*/
 
 
 
@@ -74,9 +74,25 @@ class Coin extends Phaser.GameObjects.Sprite {
 
 
 
+
+
+var data1 = {
+    waterCoinsX:[250, 320 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
+    waterCoinsy:    [440, 440, 440  , 320, 320, 100, 80 , 70, 160,160],
+    fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
+    fireCoinsy:[570, 570, 570  , 440, 320, 100, 80 , 400, 210,160]
+}
+
+var GameLevel1 = new GameLevel("level1", "tilemap1",data1);
+var GameLevel2 = new GameLevel("level2", "tilemap2",data1);
+
+
+
+
+
 var config = {
   type: Phaser.AUTO,
-  width: 640,
+  width: 800,
   height: 640,
   parent: "gameContainer",
   physics: {
@@ -86,7 +102,7 @@ var config = {
       debug: true,
     },
   },
-  scene: [GameStart, level1, NextLevel, level2, GameOver],
+  scene: [GameStart, GameLevel1, NextLevel, GameLevel2, GameOver],
 };
 
 var game = new Phaser.Game(config);
