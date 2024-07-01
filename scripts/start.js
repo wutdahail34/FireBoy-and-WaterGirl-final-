@@ -35,6 +35,7 @@ export default class GameStart extends Phaser.Scene {
             .setOrigin(0.5);
 
         this.input.keyboard.on("keydown-SPACE", this.startGame, this);
+        this.input.keyboard.on("keydown-ENTER", this.startGame, this);
         this.input.on("pointerdown", () => this.startGame(), this);
     }
 
