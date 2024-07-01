@@ -207,7 +207,7 @@ class GameLevel extends Phaser.Scene {
 
       for (let i = 0; i < 10; i++) {
         const x = coinsX[i];
-        const y = coinsY[i];
+        const y = coinsY[i]-60;
         const coin = this.coins.create(x, y, "coin");
         coin.body.allowGravity = false;
       }
@@ -218,7 +218,7 @@ class GameLevel extends Phaser.Scene {
 
       for (let i = 0; i < 10; i++) {
         const x = coinsX[i];
-        const y = coinsY[i];
+        const y = coinsY[i]-60;
         const coin2 = this.coins2.create(x, y, "coin2");
         coin2.body.allowGravity = false;
       }
@@ -301,7 +301,7 @@ class GameLevel extends Phaser.Scene {
 
       }
 
-      this.dimensionsText.setText(Math.floor(this.character2.y) + " x "+Math.floor(this.character2.x))
+      this.dimensionsText.setText(Math.floor(this.character2.x) + " x "+Math.floor(this.character2.y))
 
 
 
