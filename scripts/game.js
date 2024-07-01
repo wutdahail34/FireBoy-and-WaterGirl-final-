@@ -88,8 +88,10 @@ var data1 = {
     ]
 }
 
+
 var GameLevel1 = new GameLevel("level1", "tilemap1",data1);
 var GameLevel2 = new GameLevel("level2", "tilemap2",data1);
+var GameLevel3 = new GameLevel("level3", "tilemap3",data1);
 
 
 
@@ -107,7 +109,7 @@ var config = {
       debug: true,
     },
   },
-  scene: [GameStart, GameLevel1, NextLevel, GameLevel2, GameOver],
+  scene: [GameStart, GameLevel1, NextLevel, GameLevel2, GameLevel3, GameOver],
 };
 
 var game = new Phaser.Game(config);

@@ -37,6 +37,8 @@ class GameLevel extends Phaser.Scene {
       
       this.load.tilemapCSV("tilemap1", "./assets/LEVEL1.csv");
       this.load.tilemapCSV("tilemap2", "./assets/level2.csv");
+      this.load.tilemapCSV("tilemap3", "./assets/level3.csv");
+      
 
 
     }
@@ -376,7 +378,6 @@ class GameLevel extends Phaser.Scene {
 
       }
 
-      
 
       this.Data.walls.forEach((item)=>{
 
@@ -385,21 +386,20 @@ class GameLevel extends Phaser.Scene {
           ||this.character2.x > item[3]-20  && this.character2.x <= item[3]+20 && this.character2.y > item[4]-10  &&  this.character2.y <= item[4]+70
           ||this.character2.x > item[5]-20  && this.character2.x <= item[5]+20 && this.character2.y > item[6]-10  &&  this.character2.y <= item[6]+70) {
               
-           item[8].setY(item[1]-35);
+          item[8].setY(item[1]-35);
           item[8].setAngle(90);
           item[8].body.enable = false;
-          item[8].refreshBody();
+         item[8].refreshBody();
 
       }else {
         item[8].setY(item[1]);
-        item[8].setAngle(0)
+        item[8].setAngle(0);
         item[8].body.enable = true;
-        item[8].refreshBody();
-        console.log()
+       item[8].refreshBody();
 
       }
 
-      }
+}      
 )    
 
 
@@ -442,10 +442,15 @@ class GameLevel extends Phaser.Scene {
     }
   
     finishScene() {
-      const currentLevel = 1;
+              const currentLevel = 1;
+
+      if(this.registry.get("currentLevel")  === undefined){
       this.registry.set("currentLevel", currentLevel);
+      }
+
       this.registry.set("score", this.score);
       this.playAudio("dead");
+      this.scene.stop();
       this.theme.stop();
       this.scene.start("nextScenex", { level: currentLevel, score: this.score });
     }

@@ -75,7 +75,9 @@ export default class NextLevel extends Phaser.Scene {
     
     startNextLevel() {
 
-      const nextLevel = this.registry.get("currentLevel") + 1;
+      this.registry.set("currentLevel", this.registry.get("currentLevel")+ 1 ); ;
+      let nextLevel = this.registry.get("currentLevel");
+      console.log(nextLevel);
       this.scene.start(`level${nextLevel}`);
 
     }
