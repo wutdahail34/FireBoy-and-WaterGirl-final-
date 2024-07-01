@@ -89,9 +89,35 @@ var data1 = {
 }
 
 
+
+var data2 = {
+    waterCoinsX:[437, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
+    waterCoinsy:    [227, 227, 227  , 320, 320, 100, 80 , 70, 160,160],
+    fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
+    fireCoinsy:[570, 570, 570  , 440, 320, 100, 80 , 400, 210,160],
+
+    walls :[
+        [480, 435 , 0.8 , 450, 606,420 , 478,0.2 ],
+        [650, 305 , 0.8 , 418, 318,500 , 190,0.2 ]
+    ]
+}
+
+
+var data3 = {
+    waterCoinsX:[437, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
+    waterCoinsy:    [227, 227, 227  , 320, 320, 100, 80 , 70, 160,160],
+    fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
+    fireCoinsy:[570, 570, 570  , 440, 320, 100, 80 , 400, 210,160],
+
+    walls :[
+        [480, 435 , 0.8 , 450, 606,420 , 478,0.2 ],
+        [650, 305 , 0.8 , 418, 318,500 , 190,0.2 ]
+    ]
+}
+
 var GameLevel1 = new GameLevel("level1", "tilemap1",data1);
-var GameLevel2 = new GameLevel("level2", "tilemap2",data1);
-var GameLevel3 = new GameLevel("level3", "tilemap3",data1);
+var GameLevel2 = new GameLevel("level2", "tilemap2",data2);
+var GameLevel3 = new GameLevel("level3", "tilemap3",data3);
 
 
 
