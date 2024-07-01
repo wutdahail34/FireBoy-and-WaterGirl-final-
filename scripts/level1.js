@@ -8,6 +8,7 @@ class GameLevel extends Phaser.Scene {
     this.mapName = mapName;
     
     this.Data = Data;
+    
 
   }
 
@@ -28,6 +29,8 @@ class GameLevel extends Phaser.Scene {
       this.load.audio("theme", "./assets/theme.mp3");
       this.load.image("coin", "./assets/diamond.png");
       this.load.image("coin2", "./assets/fire.png");
+      this.load.image("wall", "./assets/Wall.png");
+      this.load.image("wallBtn", "./assets/wallBtn.png");
       
       
       
@@ -74,8 +77,7 @@ class GameLevel extends Phaser.Scene {
 
 
 
-      this.coins = this.physics.add.group();
-      this.coins2 = this.physics.add.group(); 
+
   
       const groundLevel = this.cameras.main.height - 450;
 
@@ -115,14 +117,19 @@ class GameLevel extends Phaser.Scene {
       this.character2.body.setSize(80, 200);
 
 
-      
+      this.coins = this.physics.add.staticGroup();
+      this.coins2 = this.physics.add.staticGroup(); 
 
 
 
-  
+
+
+
+
       map.setCollisionBetween(0, 2);
       this.physics.add.collider(this.character1, layer);
       this.physics.add.collider(this.character2, layer);
+
   
       this.physics.add.overlap(
         this.character2,
@@ -141,6 +148,16 @@ class GameLevel extends Phaser.Scene {
 
 
 
+
+      this.walls = this.physics.add.staticGroup();
+      this.wallBtns = this.physics.add.staticGroup();
+
+      this.createWalls();
+
+      //this.physics.add.collider(this.character1, this.wallBtns, this.handleCollisionCharacter1, null, this);
+      
+      /*this.physics.add.overlap(this.character1, this.wallBtns, this.handleCollisionCharacter1, null, this);
+      this.physics.add.overlap(this.character2, this.wallBtns, this.handleCollisionCharacter2, null, this);*/
 
 
       //loading audios and playing the theme
@@ -227,6 +244,64 @@ class GameLevel extends Phaser.Scene {
     }
 
 
+    createWalls() {
+
+
+
+      this.Data.walls.forEach(
+        (item )=>{
+      let wall = this.walls.create(item[0], item[1], 'wall').setScale(item[2]).refreshBody();
+      let wallBtn1 = this.wallBtns.create(item[3], item[4], 'wallBtn').setScale(item[7]).refreshBody();
+      let wallBtn2 = this.wallBtns.create(item[5], item[6], 'wallBtn').setScale(item[7]).refreshBody();
+
+      wall.body.allowGravity = false;
+      wallBtn1.body.allowGravity = false;
+      wallBtn2.body.allowGravity = false;
+
+
+      item.push(
+        wall,false
+      )
+
+
+      }
+    )
+
+          console.log(this.Data.walls)     
+
+
+    this.physics.add.collider(this.character1, this.walls);
+    this.physics.add.collider(this.character2, this.walls);
+
+
+    }
+
+
+  /*handleCollisionCharacter1(character, wallBtn) {
+
+    console.log("sadasd");
+    this.isColliding = false;
+
+  
+
+
+  }
+
+  handleCollisionCharacter2(character, wallBtn) {
+
+    console.log("sadasd");
+    this.isColliding = false;
+
+       /*   this.wallLinks.forEach((item)=>{
+            if(item[0] == wallBtn){
+              item[2] =1;
+            }
+          }
+  )*//*
+
+
+  }*/
+
 
   
     hitCoin(player, coin) {
@@ -301,10 +376,39 @@ class GameLevel extends Phaser.Scene {
 
       }
 
+      
+
+      this.Data.walls.forEach((item)=>{
+
+        if (this.character1.x > item[3]-20  && this.character1.x <= item[3]+20 && this.character1.y > item[4]-10  &&  this.character1.y <= item[4]+70
+          ||this.character1.x > item[5]-20  && this.character1.x <= item[5]+20 && this.character1.y > item[6]-10  &&  this.character1.y <= item[6]+70
+          ||this.character2.x > item[3]-20  && this.character2.x <= item[3]+20 && this.character2.y > item[4]-10  &&  this.character2.y <= item[4]+70
+          ||this.character2.x > item[5]-20  && this.character2.x <= item[5]+20 && this.character2.y > item[6]-10  &&  this.character2.y <= item[6]+70) {
+              
+           item[8].setY(item[1]-35);
+          item[8].setAngle(90);
+          item[8].body.enable = false;
+          item[8].refreshBody();
+
+      }else {
+        item[8].setY(item[1]);
+        item[8].setAngle(0)
+        item[8].body.enable = true;
+        item[8].refreshBody();
+        console.log()
+
+      }
+
+      }
+)    
+
+
+
+
       this.dimensionsText.setText(Math.floor(this.character2.x) + " x "+Math.floor(this.character2.y))
 
 
-
+      
 
     }
 
