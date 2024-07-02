@@ -3,9 +3,12 @@ let drawing = [];
 let currentPath = [];
 let isDrawing = false;
 let currentPlayer = 1;
+let useDefault = false;
+
+
 
 function setup() {
-  canvas = createCanvas(50, 90);
+  canvas = createCanvas(70, 90);
   canvas.parent("canvasWrapper1");
   clearCanvas();
 
@@ -13,6 +16,8 @@ function setup() {
   select("#nextButton2").mousePressed(saveDrawings);
   select("#clearButton1").mousePressed(clearCanvas);
   select("#clearButton2").mousePressed(clearCanvas);
+  select("#defaultBtn").mousePressed(setDefault);
+
 }
 
 function draw() {
@@ -37,15 +42,19 @@ function draw() {
   }
 }
 
+
 function mousePressed() {
   isDrawing = true;
   currentPath = [];
   drawing.push(currentPath);
 }
 
+
 function mouseReleased() {
   isDrawing = false;
 }
+
+
 
 function nextPlayer() {
   if (currentPlayer === 1) {
@@ -58,10 +67,12 @@ function nextPlayer() {
   }
 }
 
+
 function saveDrawings() {
   saveCanvasToLocalStorage("character2");
   alert("Characters saved!");
 }
+
 
 function clearCanvas() {
   isDrawing = false;
@@ -71,12 +82,20 @@ function clearCanvas() {
   background(255, 255, 255, 0);
 }
 
+function setDefault() {
+useDefault = !useDefault;
+
+let tick = document.querySelector("img.tick");
+useDefault ? tick.style.visibility = "visible":
+              tick.style.visibility = "hidden";
+}
+
+
+
+
 function saveCanvasToLocalStorage(key) {
   console.log(drawing);
-  if (
-    drawing.length === 0 ||
-    (drawing.length === 1 && drawing[0].length === 0)
-  ) {
+  if ( drawing.length == 0 || (drawing.length == 1 && drawing[0].length == 0) ) {
     localStorage.setItem(key, "");
   } else {
     loadPixels();

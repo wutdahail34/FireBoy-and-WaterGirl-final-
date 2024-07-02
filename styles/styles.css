@@ -138,8 +138,17 @@ canvas {
 .button-wrapper {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     margin-top: 10px;
+}
+
+.tick {
+
+    height:50px;
+    position: relative;
+
+
 }
 button {
     background-color: #fff;

@@ -441,6 +441,7 @@ class GameLevel extends Phaser.Scene {
        item[8].refreshBody();
 
       } 
+      
       if(item[9] == "open" && item[10] == "close" ){
           console.log("close")
           this.playAudio("wallClose");
@@ -472,7 +473,7 @@ class GameLevel extends Phaser.Scene {
 
     loadImageFromLocalStorage1(key) {
       let imgData = localStorage.getItem(key);
-      if (imgData) {
+      if (!useDefault  && imgData) {
         return imgData;
       }
       return "assets/firecharacter.png";
@@ -480,7 +481,7 @@ class GameLevel extends Phaser.Scene {
   
     loadImageFromLocalStorage2(key) {
       let imgData = localStorage.getItem(key);
-      if (imgData) {
+      if (!useDefault  && imgData) {
         return imgData;
       }
       return "assets/watercharacter.png";
@@ -529,7 +530,7 @@ class GameLevel extends Phaser.Scene {
       let currentLevel = this.registry.get("currentLevel") ;
 
       const levelEndTime = Math.floor(new Date().getTime() / 1000);
-      const speedValue =Math.floor(10000 / (levelEndTime - this.levelStartTime))
+      const speedValue =Math.floor(10 / (levelEndTime - this.levelStartTime) * 10000)
       this.score +=speedValue;
       scores.push(this.score);
       if(currentLevel == this.levelCount){

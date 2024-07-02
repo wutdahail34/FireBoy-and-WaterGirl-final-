@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FireBoy and WaterGirl</title>
-  <script src="./p5/p5.js"></script>  <script src="./scripts/draw.js"></script>
+  <script src="./p5/p5.js"></script>  
+  <script src="./scripts/draw.js"></script>
 
   <link rel="stylesheet" href="./styles/styles.css" />
 </head>
@@ -22,9 +23,12 @@
     <img src="assets/leaf1.png" class="leaf1">
   </section>
 
+
   <div class="choose-container">
     <h1>Draw your characters!</h1>
     <h3>Leave it empty to play with the real fireboy and watergirl :)</h3>
+
+
     <div id="canvasContainer1" class="canvas-container">
       <p id="player1-Text">Draw Player 1</p>
       <div id="canvasWrapper1"></div>
@@ -33,6 +37,8 @@
         <button id="nextButton1">Next</button>
       </div>
     </div>
+
+
     <div id="canvasContainer2" class="canvas-container" style="display: none">
       <p id="player2-Text">Draw Player 2</p>
       <div id="canvasWrapper2"></div>
@@ -42,6 +48,16 @@
       </div>
     </div>
   </div>
+
+
+  <div id="canvasContainer" class="canvas-container" style="margin: 0;" >
+
+  <div class="button-wrapper">
+    <button id="defaultBtn">Use Default</button><img src="./assets/tick.png" class="tick" style="visibility: hidden;" >
+  </div>
+</div>
+
+  
 
 
   
