@@ -1,6 +1,12 @@
-export default class GameOver extends Phaser.Scene {
+export default class End extends Phaser.Scene {
     constructor() {
-        super({ key: "gameover" });
+        super({ key: "end" });
+    }
+
+    init(data) {
+        this.scores = data.scores;
+        console.log(data)
+
     }
 
     create() {
@@ -14,16 +20,47 @@ export default class GameOver extends Phaser.Scene {
         this.add
             .bitmapText(
                 this.center_width,
-                this.center_height,
-                "arcade",
-                "GAME OVER",
-                45
+                this.center_height - 220,
+                "arcade", 
+                "Congratulations Champ!",
+                40
             )
             .setOrigin(0.5);
+
+
+
         this.add
             .bitmapText(
                 this.center_width,
-                this.center_height + 50,
+                this.center_height - 160,
+                "arcade", 
+                "Your Scores:",
+                45
+            )
+            .setOrigin(0.5);
+
+
+
+        const lineHeight = 41;
+        const startY = this.center_height - 95 ;
+
+            console.log(this.scores)
+        for (let i = 0; i < this.scores.length; i++) {
+            this.add
+                .bitmapText(
+                    this.center_width,
+                    startY + i * lineHeight,
+                    "arcade",
+                    `Level ${i + 1}:          ${this.scores[i]}`,
+                    21
+                )
+                .setOrigin(0.5);
+        }
+
+        this.add
+            .bitmapText(
+                this.center_width,
+                this.center_height + this.scores.length * lineHeight + 30,
                 "arcade",
                 "Press SPACE or Click to restart!",
                 15
@@ -38,3 +75,5 @@ export default class GameOver extends Phaser.Scene {
         this.scene.start("gamestart");
     }
 }
+
+//this.scene.start('gameover', { });
