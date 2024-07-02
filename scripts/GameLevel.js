@@ -4,10 +4,14 @@ class GameLevel extends Phaser.Scene {
 
   constructor(levelName = "level1" , mapName ,  Data) {
     super({ key: levelName });
+    
     this.levelName = levelName;
     this.mapName = mapName;
+
+    this.intialData = Data;
     
-    this.Data = Data;
+    this.levelCount = 3;
+
     
 
   }
@@ -62,6 +66,7 @@ class GameLevel extends Phaser.Scene {
   
     create() {
 
+    this.Data = structuredClone(this.intialData);
 
 
 
@@ -473,17 +478,26 @@ class GameLevel extends Phaser.Scene {
     }
   
     finishScene() {
-              const currentLevel = 1;
 
       if(this.registry.get("currentLevel")  === undefined){
-      this.registry.set("currentLevel", currentLevel);
+      this.registry.set("currentLevel", 1);
       }
-
+      let currentLevel = this.registry.get("currentLevel") ;
+      if(currentLevel == this.levelCount){
+        this.registry.set("score", this.score);
+        this.playAudio("dead");
+        this.scene.stop();
+        this.theme.stop();
+        this.registry.set("currentLevel", 1);
+        this.scene.start("gameover", { level: currentLevel, score: this.score });
+      }else{
       this.registry.set("score", this.score);
       this.playAudio("dead");
       this.scene.stop();
       this.theme.stop();
-      this.scene.start("nextScenex", { level: currentLevel, score: this.score });
+      this.scene.start("nextScenex", { level: currentLevel, score: this.score }); 
+      }
+
     }
   }
   

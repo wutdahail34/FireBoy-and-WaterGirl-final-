@@ -75,8 +75,7 @@ class Coin extends Phaser.GameObjects.Sprite {
 
 
 
-
-var data1 = {
+const data1 = {
     waterCoinsX:[165, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
     waterCoinsy:    [227, 227, 227  , 320, 320, 100, 80 , 70, 160,160],
     fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
@@ -90,7 +89,7 @@ var data1 = {
 
 
 
-var data2 = {
+const data2 = {
     waterCoinsX:[437, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
     waterCoinsy:    [227, 227, 227  , 320, 320, 100, 80 , 70, 160,160],
     fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
@@ -103,7 +102,7 @@ var data2 = {
 }
 
 
-var data3 = {
+const data3 = {
     waterCoinsX:[437, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
     waterCoinsy:    [227, 227, 227  , 320, 320, 100, 80 , 70, 160,160],
     fireCoinsX:[250, 375 , 500 , 500, 550 ,480, 380 , 300 , 380, 200 ],
