@@ -1,5 +1,5 @@
 import GameOver from "./end.js";
-import GameLevel from "./level1.js";
+import GameLevel from "./GameLevel.js";
 //import level2 from "./level2.js";
 import NextLevel from "./next.js";
 import GameStart from "./start.js";
