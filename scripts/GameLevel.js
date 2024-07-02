@@ -51,6 +51,8 @@ class GameLevel extends Phaser.Scene {
       this.load.image("coin2", "./assets/fire.png");
       this.load.image("wall", "./assets/Wall.png");
       this.load.image("wallBtn", "./assets/wallBtn.png");
+      this.load.audio("wallOpen" , "../assets/wallOpen.mp3")
+      this.load.audio("wallClose" , "../assets/wallClose.mp3")
       
       
       
@@ -115,7 +117,7 @@ class GameLevel extends Phaser.Scene {
 
 
   
-      const groundLevel = this.cameras.main.height - 450;
+      const groundLevel = this.cameras.main.height - 600;
 
 
 
@@ -295,7 +297,7 @@ class GameLevel extends Phaser.Scene {
       wallBtn2.body.allowGravity = false;
 
       item.push(
-        wall,false
+        wall,false,"close","close"
       )
 
 
@@ -351,6 +353,8 @@ class GameLevel extends Phaser.Scene {
         jump: this.sound.add("jump"),
         coin: this.sound.add("coin"),
         levelEnd: this.sound.add("levelEnd"),
+        wallOpen: this.sound.add("wallOpen"),
+        wallClose: this.sound.add("wallClose"),
       };
     }
   
@@ -363,7 +367,7 @@ class GameLevel extends Phaser.Scene {
       this.theme.stop();
       this.theme.play({
         mute: false,
-        volume: 0,
+        volume: 0.1,
         rate: 1,
         detune: 0,
         seek: 0,
@@ -412,28 +416,44 @@ class GameLevel extends Phaser.Scene {
       }
 
 
-      this.Data.walls.forEach((item)=>{
+      this.Data.walls.forEach( (item)=>{
+
+            item[9] = item[10];
 
         if (this.character1.x > item[3]-20  && this.character1.x <= item[3]+20 && this.character1.y > item[4]-10  &&  this.character1.y <= item[4]+70
           ||this.character1.x > item[5]-20  && this.character1.x <= item[5]+20 && this.character1.y > item[6]-10  &&  this.character1.y <= item[6]+70
           ||this.character2.x > item[3]-20  && this.character2.x <= item[3]+20 && this.character2.y > item[4]-10  &&  this.character2.y <= item[4]+70
           ||this.character2.x > item[5]-20  && this.character2.x <= item[5]+20 && this.character2.y > item[6]-10  &&  this.character2.y <= item[6]+70) {
-              
+          
+            item[10] = "open";
           item[8].setY(item[1]-35);
           item[8].setAngle(90);
-          item[8].body.enable = false;
+          item[8].body.enable = false; 
          item[8].refreshBody();
 
+
       }else {
+        item[10] = "close";
         item[8].setY(item[1]);
         item[8].setAngle(0);
         item[8].body.enable = true;
        item[8].refreshBody();
 
-      }
+      } 
+      if(item[9] == "open" && item[10] == "close" ){
+          console.log("close")
+          this.playAudio("wallClose");
+        }else if(item[9] == "close" && item[10]=="open"){
+          console.log("open")
+          this.playAudio("wallOpen");
+
+
+        }
 
 }      
-)    
+)  
+
+
 
 
 
@@ -506,12 +526,14 @@ class GameLevel extends Phaser.Scene {
       this.registry.set("currentLevel", 1);
       }
       let currentLevel = this.registry.get("currentLevel") ;
+      scores.push(this.score);
       if(currentLevel == this.levelCount){
+
         this.playAudio("levelEnd");
         this.scene.stop();
         this.theme.stop();
         this.registry.set("currentLevel", 1);
-        this.scene.start("gameover", { level: currentLevel, score: this.score });
+        this.scene.start("end", { level: currentLevel, scores: scores });
         scores = [];
       }else{
         //console.log(scores)
@@ -519,7 +541,7 @@ class GameLevel extends Phaser.Scene {
         this.playAudio("levelEnd");
         this.scene.stop();
         this.theme.stop();
-        this.scene.start("nextScenex", { }); 
+        this.scene.start("nextScenex", { score : this.score}); 
       }
 
     }
