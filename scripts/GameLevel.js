@@ -87,6 +87,7 @@ class GameLevel extends Phaser.Scene {
     
 
     */
+    this.levelStartTime = Math.floor(new Date().getTime() / 1000);
 
 
 
@@ -526,6 +527,10 @@ class GameLevel extends Phaser.Scene {
       this.registry.set("currentLevel", 1);
       }
       let currentLevel = this.registry.get("currentLevel") ;
+
+      const levelEndTime = Math.floor(new Date().getTime() / 1000);
+      const speedValue =Math.floor(10000 / (levelEndTime - this.levelStartTime))
+      this.score +=speedValue;
       scores.push(this.score);
       if(currentLevel == this.levelCount){
 
