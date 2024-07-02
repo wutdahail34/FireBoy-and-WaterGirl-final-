@@ -73,7 +73,9 @@ class Coin extends Phaser.GameObjects.Sprite {
 
 
 
-
+/*
+  A data object for every level
+*/
 
 const data1 = {
     waterCoinsX:[165, 299 , 390 , 100, 550 ,550, 340 , 70 , 300, 150 ],
@@ -114,6 +116,7 @@ const data3 = {
     ]
 }
 
+// levelkey,  map name , data object
 var GameLevel1 = new GameLevel("level1", "tilemap1",data1);
 var GameLevel2 = new GameLevel("level2", "tilemap2",data2);
 var GameLevel3 = new GameLevel("level3", "tilemap3",data3);

@@ -1,3 +1,6 @@
+    let scores =[];
+
+
 class GameLevel extends Phaser.Scene {
 
 
@@ -10,7 +13,10 @@ class GameLevel extends Phaser.Scene {
 
     this.intialData = Data;
     
+
+
     this.levelCount = 3;
+
 
     
 
@@ -19,7 +25,8 @@ class GameLevel extends Phaser.Scene {
 
   
     preload() {
-
+      //Loading to phaser's cache 
+      //to have all ressources in ram
 
 
       this.load.image("tileset", "./assets/tileset.png");
@@ -38,7 +45,7 @@ class GameLevel extends Phaser.Scene {
 
       this.load.audio("coin", "./assets/coin.mp3");
       this.load.audio("jump", "./assets/jump.mp3");
-      this.load.audio("dead", "./assets/dead.mp3");
+      this.load.audio("levelEnd", "./assets/levelEnd.mp3");
       this.load.audio("theme", "./assets/theme.mp3");
       this.load.image("coin", "./assets/diamond.png");
       this.load.image("coin2", "./assets/fire.png");
@@ -47,7 +54,7 @@ class GameLevel extends Phaser.Scene {
       
       
       
-      
+
       this.load.tilemapCSV("tilemap1", "./assets/LEVEL1.csv");
       this.load.tilemapCSV("tilemap2", "./assets/level2.csv");
       this.load.tilemapCSV("tilemap3", "./assets/level3.csv");
@@ -66,7 +73,18 @@ class GameLevel extends Phaser.Scene {
   
     create() {
 
-    this.Data = structuredClone(this.intialData);
+    this.Data = structuredClone(this.intialData);// To allow repeating of the cycle of levelswithout problems
+    /* explantion:
+
+    The constructor is runned once when the object of a levvel is declared and initialized
+    
+    and having the this.Data have the same refrencee in memory to the object created the first time will cause a problem
+
+    the game pushes to an array.
+    I need that resetted
+    
+
+    */
 
 
 
@@ -85,6 +103,8 @@ class GameLevel extends Phaser.Scene {
         tileWidth: 32,
         tileHeight: 32,
       });
+
+
       const tiles = map.addTilesetImage("tileset");
       const layerY = background.displayHeight / map.heightInPixels;
       const layer = map.createLayer(0, tiles, 0, layerY);
@@ -207,12 +227,12 @@ class GameLevel extends Phaser.Scene {
 
 
   
-      this.updateScoreEvent = this.time.addEvent({
+      /*this.updateScoreEvent = this.time.addEvent({
         delay: 100,
         callback: () => this.updateScore(),
         callbackScope: this,
         loop: true,
-      });
+      });*/
   
       this.cursors = this.input.keyboard.createCursorKeys();
       this.cameras.main.startFollow(this.character1, true);
@@ -330,7 +350,7 @@ class GameLevel extends Phaser.Scene {
       this.audios = {
         jump: this.sound.add("jump"),
         coin: this.sound.add("coin"),
-        dead: this.sound.add("dead"),
+        levelEnd: this.sound.add("levelEnd"),
       };
     }
   
@@ -356,7 +376,7 @@ class GameLevel extends Phaser.Scene {
 
 
   
-    update() {
+    update() {// a continouees infinite loop till the level ends
 
 
       this.character1.setVelocityX(0);
@@ -476,6 +496,9 @@ class GameLevel extends Phaser.Scene {
         },
       });
     }
+
+
+    
   
     finishScene() {
 
@@ -484,18 +507,19 @@ class GameLevel extends Phaser.Scene {
       }
       let currentLevel = this.registry.get("currentLevel") ;
       if(currentLevel == this.levelCount){
-        this.registry.set("score", this.score);
-        this.playAudio("dead");
+        this.playAudio("levelEnd");
         this.scene.stop();
         this.theme.stop();
         this.registry.set("currentLevel", 1);
         this.scene.start("gameover", { level: currentLevel, score: this.score });
+        scores = [];
       }else{
-      this.registry.set("score", this.score);
-      this.playAudio("dead");
-      this.scene.stop();
-      this.theme.stop();
-      this.scene.start("nextScenex", { level: currentLevel, score: this.score }); 
+        //console.log(scores)
+        this.registry.set("score", this.score);
+        this.playAudio("levelEnd");
+        this.scene.stop();
+        this.theme.stop();
+        this.scene.start("nextScenex", { }); 
       }
 
     }
