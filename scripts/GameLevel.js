@@ -36,8 +36,7 @@ class GameLevel extends Phaser.Scene {
       this.load.image("tileset", "./assets/images/tileset.png");
       this.load.image("background", "./assets/images/Ground.png");
 
-      /*this.load.image("character1", "./assets/firecharacter.png");
-      this.load.image("character2", "./assets/watercharacter.png");*/
+
       this.load.image(
         "character1",
         this.loadImageFromLocalStorage1("character1")
@@ -136,7 +135,7 @@ class GameLevel extends Phaser.Scene {
 
   
       this.character1 = this.physics.add
-        .sprite(190, groundLevel, "character1")
+        .sprite(100, groundLevel, "character1")
         .setOrigin(0.5, 1)
         .setCollideWorldBounds(true)
         .setBounce(0.2)
@@ -152,7 +151,7 @@ class GameLevel extends Phaser.Scene {
 
   
       this.character2 = this.physics.add
-        .sprite(200, groundLevel, "character2")
+        .sprite(160, groundLevel, "character2")
         .setOrigin(0.5, 1)
         .setCollideWorldBounds(true)
         .setBounce(0.2)
@@ -200,10 +199,8 @@ class GameLevel extends Phaser.Scene {
 
       this.createWalls();
 
-      //this.physics.add.collider(this.character1, this.wallBtns, this.handleCollisionCharacter1, null, this);
-      
-      /*this.physics.add.overlap(this.character1, this.wallBtns, this.handleCollisionCharacter1, null, this);
-      this.physics.add.overlap(this.character2, this.wallBtns, this.handleCollisionCharacter2, null, this);*/
+ 
+
 
 
       //loading audios and playing the theme
@@ -539,7 +536,7 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
       if (!useDefault  && imgData) {
         return imgData;
       }
-      return "assets/firecharacter.png";
+      return "assets/images/firecharacter.png";
     }
   
     loadImageFromLocalStorage2(key) {
@@ -547,7 +544,7 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
       if (!useDefault  && imgData) {
         return imgData;
       }
-      return "assets/watercharacter.png";
+      return "assets/images/watercharacter.png";
     }
   
   
