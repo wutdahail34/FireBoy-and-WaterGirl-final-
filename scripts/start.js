@@ -1,7 +1,7 @@
 export default class GameStart extends Phaser.Scene {
     constructor() {
         super({ key: "gamestart" });
-        this.hearts = 6;
+        this.hearts = 8;
     }
 
     preload() {

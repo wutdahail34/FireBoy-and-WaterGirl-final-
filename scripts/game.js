@@ -1,4 +1,5 @@
-import GameOver from "./end.js";
+import end from "./end.js";
+import GameOver from "./GameOver.js";
 import GameLevel from "./GameLevel.js";
 //import level2 from "./level2.js";
 import NextLevel from "./next.js";
@@ -85,7 +86,7 @@ const data1 = {
 
     walls :[
         [480, 435 , 0.8 , 450, 606,420 , 478,0.2 ], /* wallx , wally , wall scale, pad1x, pad1y ,pad2x , pad2y,pads scale*/
-        [650, 305 , 0.8 , 418, 318,500 , 190,0.2 ]
+        [600, 305 , 0.8 , 418, 318,500 , 190,0.2 ]
     ],
 
     water:[[729,350],[746,348]],
@@ -96,17 +97,17 @@ const data1 = {
 
 var data2 = {
     waterCoinsX:[288, 127 , 667 , 700, 136 ,430, 750, 276 ],
-    waterCoinsy:[130, 600, 220  , 130, 318, 430, 510, 606 ],
+    waterCoinsy:[130, 600, 220  , 130, 318, 370, 510, 606 ],
     fireCoinsX:[348, 60 , 550 , 600, 296 ,50, 650, 376 ],
     fireCoinsy:[130, 350, 200  , 300, 338, 480, 500, 640],
 
     walls :[
-        [470, 465 , 0.8 , 408, 510,583 , 510,0.2 ],
-        [215, 83 , 0.8 , 265, 222,130 , 126,0.2 ]
+        [470, 465 , 0.8 , 408, 510,  583 , 510,0.2 ],
+        [215, 83 , 0.8 , 300, 222,   130 , 126,0.2 ]
     ],
     
-    water:[[729,350],[746,348],[47,444]],
-    fire:[[370,188],[370,188] ]
+    water:[[594,382],[625,382]],
+    fire:[[241,222],[495,158], [432,382] ]
 }
 
 
@@ -118,12 +119,12 @@ const data3 = {
     fireCoinsy:[130, 260, 400  , 130, 400, 500, 500, 636],
 
     walls :[
-        [424, 340 , 0.8 , 177, 253,475 , 382,0.2 ],
-        [542, 83 , 0.8 , 713, 254,410 , 158,0.2 ]
+        [424, 340 , 0.8 , 177, 253  ,475 , 382,0.2 ],
+        [542, 83 , 0.8 , 713, 254   ,410 , 158,0.2 ]
     ],
     
-    water:[[729,350],[746,348],[47,444]],
-    fire:[[370,188],[370,188] ]
+    water:[[755,252],[243,252]],
+    fire:[[525,252],[304,380], [656,508] ]
 }
 
 // levelkey,  map name , data object
@@ -147,7 +148,7 @@ var config = {
       debug: true,
     },
   },
-  scene: [GameStart, GameLevel1, NextLevel, GameLevel2, GameLevel3, GameOver],
+  scene: [GameStart, GameLevel1, NextLevel, GameLevel2, GameLevel3,end, GameOver],
 };
 
 var game = new Phaser.Game(config);

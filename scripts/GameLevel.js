@@ -51,14 +51,17 @@ class GameLevel extends Phaser.Scene {
       this.load.audio("jump", "./assets/jump.mp3");
       this.load.audio("levelEnd", "./assets/levelEnd.mp3");
       this.load.audio("theme", "./assets/theme.mp3");
+      
       this.load.image("coin", "./assets/diamond.png");
       this.load.image("coin2", "./assets/fire.png");
       this.load.image("wall", "./assets/Wall.png");
       this.load.image("wallBtn", "./assets/wallBtn.png");
+      this.load.image("heart" , "../assets/images/heart.png")
+      
       this.load.audio("wallOpen" , "../assets/wallOpen.mp3")
       this.load.audio("wallClose" , "../assets/wallClose.mp3")
-      
-      
+      this.load.audio("lose" , "../assets/audio/lose.mp3")
+      this.load.audio("gameOverSound" , "../assets/audio/gameOver.mp3")
       
 
       this.load.tilemapCSV("tilemap1", "./assets/LEVEL1.csv");
@@ -210,13 +213,7 @@ class GameLevel extends Phaser.Scene {
   
       this.score = 0;
   
-      this.scoreText = this.add.text(16, 16, "Score: 0", {
-        fontSize: "24px",
-        fill: "#fff",
-      }).setScrollFactor(0).setDepth(5);
-
-
-      this.heartsView = this.add.text(750, 0, this.hearts, {
+      this.scoreText = this.add.text(16, 10, "Score: 0", {
         fontSize: "24px",
         fill: "#fff",
       }).setScrollFactor(0).setDepth(5);
@@ -258,6 +255,7 @@ class GameLevel extends Phaser.Scene {
       this.character2.setDebug(true, true, 0xff0000);
   
       this.createCoins();
+      this.createHearts();
     }
 
 
@@ -290,6 +288,33 @@ class GameLevel extends Phaser.Scene {
 
 
     }
+
+    createHearts(){
+
+    this.heartsGroup = this.physics.add.staticGroup().setDepth(5);
+
+    for (let i = 0; i < this.hearts; i++) {
+        let heart = this.heartsGroup.create(770 - i * 25, 16, 'heart').setDepth(5).setScale(0.1);
+        heart.refreshBody();
+        this.heartsGroup.add(heart);
+    }
+
+    }
+
+     loseHeart() {
+      // Remove the last heart from the group
+      if (this.heartsGroup.getLength() > 0) {
+          let lastHeart = this.heartsGroup.getLast(true);
+          lastHeart.destroy();
+
+          if(this.hearts == 0){
+            this.looseGame();
+          }else{
+           this.playAudio("lose");
+
+          }
+      }
+  }
 
 
     createWalls() {
@@ -358,13 +383,16 @@ class GameLevel extends Phaser.Scene {
       coin.destroy();
     }
   
-    loadAudios() {
+    loadAudios() {//filling audio objects in an arraay
       this.audios = {
         jump: this.sound.add("jump"),
         coin: this.sound.add("coin"),
         levelEnd: this.sound.add("levelEnd"),
         wallOpen: this.sound.add("wallOpen"),
         wallClose: this.sound.add("wallClose"),
+        lose: this.sound.add("lose"),
+        gameOverSound: this.sound.add("gameOverSound"),
+        
       };
     }
   
@@ -481,24 +509,28 @@ this.Data.fire.forEach( (item)=>{
   console.log(item[1]);*/
 
 if (x2 > item[0]-17   &&   x2 <= item[0]+17  &&   y2 > item[1]-8   &&    y2 <= item[1]+8) {
- this.character2.x = x2 + 80;/**/
+
+ this.character2.x = x2 + 70;/**/
 
  this.hearts--;
- this.heartsView.setText(this.hearts)
-
+ this.loseHeart();
 }
 }      
-)  
+)
+
+
+
 
 this.Data.water.forEach( (item)=>{
-  /*console.log("in");
-  console.log(item[0]);
-  console.log(item[1]);*/
+
 
 if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= item[1]+8) {
- this.character1.x = x1 - 80;/**/
+
+ this.character1.x = x1 - 70;
+
  this.hearts--;
- this.heartsView.setText(this.hearts)
+ this.loseHeart();
+
 
 }
 }      
@@ -569,6 +601,27 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
     }
 
 
+
+    looseGame(){
+        this.registry.set("currentLevel", 1);
+
+        let currentLevel = this.registry.get("currentLevel") ;
+  
+        scores.push(this.score);
+
+
+          this.registry.set("score", this.score);
+          this.playAudio("gameOverSound");
+          this.scene.stop();
+          this.theme.stop();
+          this.scene.start("gameover", {  scores: scores });
+          scores = []; 
+
+  
+
+
+
+    }
     
   
     finishScene() {

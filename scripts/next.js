@@ -7,12 +7,16 @@ export default class NextLevel extends Phaser.Scene {
       this.load.bitmapFont("arcade", "assets/arcade.png", "assets/arcade.xml");
     }
 
+    init(data){
+      this.hearts = data.hearts;
+      this.previousScore = data.score || 0;
 
+    }
 
 
 
   
-    create(data) {
+    create() {
 
 
 
@@ -24,7 +28,6 @@ export default class NextLevel extends Phaser.Scene {
     
       this.cameras.main.setBackgroundColor(0x87ceeb);
     
-      const previousScore = data.score || 0;
 
 
       this.add
@@ -32,7 +35,7 @@ export default class NextLevel extends Phaser.Scene {
           this.center_width,
           this.center_height - 50,
           "arcade",
-          `Score: ${previousScore}`,
+          `Score: ${this.previousScore}`,
           25
         )
         .setOrigin(0.5);

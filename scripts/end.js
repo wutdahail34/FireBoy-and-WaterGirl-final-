@@ -23,7 +23,7 @@ export default class End extends Phaser.Scene {
                 this.center_height - 220,
                 "arcade", 
                 "Congratulations Champ!",
-                40
+                45
             )
             .setOrigin(0.5);
 
@@ -35,7 +35,7 @@ export default class End extends Phaser.Scene {
                 this.center_height - 160,
                 "arcade", 
                 "Your Scores:",
-                45
+                40
             )
             .setOrigin(0.5);
 
