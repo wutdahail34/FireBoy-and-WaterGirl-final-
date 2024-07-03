@@ -1,20 +1,10 @@
     let scores =[];
-
-
 class GameLevel extends Phaser.Scene {
-
-
-
   constructor(levelName = "level1" , mapName ,  Data) {
-    super({ key: levelName });
-    
+    super({ key: levelName }); 
     this.levelName = levelName;
     this.mapName = mapName;
-
     this.intialData = Data;
-    
-
-
     this.levelCount = 3;
 
 
@@ -254,7 +244,43 @@ class GameLevel extends Phaser.Scene {
   
       this.createCoins();
       this.createHearts();
+      this.setupTouchControls();
     }
+
+
+    setupTouchControls() {
+      const leftButton1 = document.getElementById("left1");
+      const rightButton1 = document.getElementById("right1");
+      const upButton1 = document.getElementById("up1");
+  
+      leftButton1.addEventListener("touchstart", () => this.moveCharacter(this.character1, "left"));
+      rightButton1.addEventListener("touchstart", () => this.moveCharacter(this.character1, "right"));
+      upButton1.addEventListener("touchstart", () => this.jumpCharacter(this.character1));
+  
+      const leftButton2 = document.getElementById("left2");
+      const rightButton2 = document.getElementById("right2");
+      const upButton2 = document.getElementById("up2");
+  
+      leftButton2.addEventListener("touchstart", () => this.moveCharacter(this.character2, "left"));
+      rightButton2.addEventListener("touchstart", () => this.moveCharacter(this.character2, "right"));
+      upButton2.addEventListener("touchstart", () => this.jumpCharacter(this.character2));
+    }
+  
+    moveCharacter(character, direction) {
+      if (direction === "left") {
+        character.setVelocityX(-400);
+      } else if (direction === "right") {
+        character.setVelocityX(400);
+      }
+    }
+  
+    jumpCharacter(character) {
+      if (character.body.blocked.down) {
+        character.setVelocityY(-500);
+        this.playAudio("jump");
+      }
+    }
+  
 
 
   
