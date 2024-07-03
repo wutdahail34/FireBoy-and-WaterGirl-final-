@@ -148,7 +148,6 @@ class GameLevel extends Phaser.Scene {
 
 
 
-
   
       this.character2 = this.physics.add
         .sprite(160, groundLevel, "character2")
