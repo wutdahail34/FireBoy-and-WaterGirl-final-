@@ -33,7 +33,7 @@ class GameLevel extends Phaser.Scene {
       //to have all ressources in ram
 
 
-      this.load.image("tileset", "./assets/images/tileset.png");
+      this.load.image("tileset", "./assets/images/Tileset.png");
       this.load.image("background", "./assets/images/Ground.png");
 
 
