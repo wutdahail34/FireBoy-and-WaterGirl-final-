@@ -22,6 +22,10 @@ class GameLevel extends Phaser.Scene {
 
   }
 
+  init(data){
+    this.hearts = data.hearts
+  }
+
 
   
     preload() {
@@ -211,6 +215,11 @@ class GameLevel extends Phaser.Scene {
         fill: "#fff",
       }).setScrollFactor(0).setDepth(5);
 
+
+      this.heartsView = this.add.text(750, 0, this.hearts, {
+        fontSize: "24px",
+        fill: "#fff",
+      }).setScrollFactor(0).setDepth(5);
 
 
 
@@ -408,6 +417,7 @@ class GameLevel extends Phaser.Scene {
       
 
 
+      //End the game when the door is reacvhed
       const thresholdY = 150; 
       if (this.character1.y <= thresholdY && this.character2.y <= thresholdY
           && this.character1.x <= 100 && this.character2.x <= 100 ) {
@@ -416,15 +426,22 @@ class GameLevel extends Phaser.Scene {
 
       }
 
+      let x1,x2,y1,y2;
+      x1 = this.character1.x ;
+      y1 = this.character1.y ;
+      x2 = this.character2.x ;
+      y2 = this.character2.y ;
+
 
       this.Data.walls.forEach( (item)=>{
 
             item[9] = item[10];
 
-        if (this.character1.x > item[3]-20  && this.character1.x <= item[3]+20 && this.character1.y > item[4]-10  &&  this.character1.y <= item[4]+70
-          ||this.character1.x > item[5]-20  && this.character1.x <= item[5]+20 && this.character1.y > item[6]-10  &&  this.character1.y <= item[6]+70
-          ||this.character2.x > item[3]-20  && this.character2.x <= item[3]+20 && this.character2.y > item[4]-10  &&  this.character2.y <= item[4]+70
-          ||this.character2.x > item[5]-20  && this.character2.x <= item[5]+20 && this.character2.y > item[6]-10  &&  this.character2.y <= item[6]+70) {
+          
+        if (x1> item[3]-20    &&   x1<= item[3]+20   &&   y1 > item[4]-10   &&    y1 <= item[4]+70
+          ||x1> item[5]-20    &&   x1<= item[5]+20   &&   y1 > item[6]-10   &&    y1 <= item[6]+70
+          ||x2 > item[3]-20   &&   x2 <= item[3]+20  &&   y2 > item[4]-10   &&    y2 <= item[4]+70
+          ||x2 > item[5]-20   &&   x2 <= item[5]+20  &&   y2 > item[6]-10   &&    y2 <= item[6]+70) {
           
             item[10] = "open";
           item[8].setY(item[1]-35);
@@ -454,6 +471,38 @@ class GameLevel extends Phaser.Scene {
 
 }      
 )  
+
+
+
+
+this.Data.fire.forEach( (item)=>{
+  /*console.log("in");
+  console.log(item[0]);
+  console.log(item[1]);*/
+
+if (x2 > item[0]-17   &&   x2 <= item[0]+17  &&   y2 > item[1]-8   &&    y2 <= item[1]+8) {
+ this.character2.x = x2 + 80;/**/
+
+ this.hearts--;
+ this.heartsView.setText(this.hearts)
+
+}
+}      
+)  
+
+this.Data.water.forEach( (item)=>{
+  /*console.log("in");
+  console.log(item[0]);
+  console.log(item[1]);*/
+
+if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= item[1]+8) {
+ this.character1.x = x1 - 80;/**/
+ this.hearts--;
+ this.heartsView.setText(this.hearts)
+
+}
+}      
+) 
 
 
 
@@ -547,7 +596,7 @@ class GameLevel extends Phaser.Scene {
         this.playAudio("levelEnd");
         this.scene.stop();
         this.theme.stop();
-        this.scene.start("nextScenex", { score : this.score}); 
+        this.scene.start("nextScenex", { score : this.score, hearts: this.hearts}); 
       }
 
     }
