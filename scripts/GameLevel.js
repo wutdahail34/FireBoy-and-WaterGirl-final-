@@ -33,8 +33,8 @@ class GameLevel extends Phaser.Scene {
       //to have all ressources in ram
 
 
-      this.load.image("tileset", "./assets/tileset.png");
-      this.load.image("background", "./assets/Ground.png");
+      this.load.image("tileset", "./assets/images/tileset.png");
+      this.load.image("background", "./assets/images/Ground.png");
 
       /*this.load.image("character1", "./assets/firecharacter.png");
       this.load.image("character2", "./assets/watercharacter.png");*/
@@ -47,26 +47,26 @@ class GameLevel extends Phaser.Scene {
         this.loadImageFromLocalStorage2("character2")
       );
 
-      this.load.audio("coin", "./assets/coin.mp3");
-      this.load.audio("jump", "./assets/jump.mp3");
-      this.load.audio("levelEnd", "./assets/levelEnd.mp3");
-      this.load.audio("theme", "./assets/theme.mp3");
+      this.load.audio("coin", "./assets/audio/coin.mp3");
+      this.load.audio("jump", "./assets/audio/jump.mp3");
+      this.load.audio("levelEnd", "./assets/audio/levelEnd.mp3");
+      this.load.audio("theme", "./assets/audio/theme.mp3");
       
-      this.load.image("coin", "./assets/diamond.png");
-      this.load.image("coin2", "./assets/fire.png");
-      this.load.image("wall", "./assets/Wall.png");
-      this.load.image("wallBtn", "./assets/wallBtn.png");
+      this.load.image("coin", "./assets/images/diamond.png");
+      this.load.image("coin2", "./assets/images/fire.png");
+      this.load.image("wall", "./assets/images/Wall.png");
+      this.load.image("wallBtn", "./assets/images/wallBtn.png");
       this.load.image("heart" , "../assets/images/heart.png")
       
-      this.load.audio("wallOpen" , "../assets/wallOpen.mp3")
-      this.load.audio("wallClose" , "../assets/wallClose.mp3")
+      this.load.audio("wallOpen" , "../assets/audio/wallOpen.mp3")
+      this.load.audio("wallClose" , "../assets/audio/wallClose.mp3")
       this.load.audio("lose" , "../assets/audio/lose.mp3")
       this.load.audio("gameOverSound" , "../assets/audio/gameOver.mp3")
       
 
-      this.load.tilemapCSV("tilemap1", "./assets/LEVEL1.csv");
-      this.load.tilemapCSV("tilemap2", "./assets/level2.csv");
-      this.load.tilemapCSV("tilemap3", "./assets/level3.csv");
+      this.load.tilemapCSV("tilemap1", "./assets/maps/LEVEL1.csv");
+      this.load.tilemapCSV("tilemap2", "./assets/maps/level2.csv");
+      this.load.tilemapCSV("tilemap3", "./assets/maps/level3.csv");
       
 
 
