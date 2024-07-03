@@ -441,12 +441,12 @@ class GameLevel extends Phaser.Scene {
        item[8].refreshBody();
 
       } 
-      
+
       if(item[9] == "open" && item[10] == "close" ){
-          console.log("close")
+          //console.log("close")
           this.playAudio("wallClose");
         }else if(item[9] == "close" && item[10]=="open"){
-          console.log("open")
+          //console.log("open")
           this.playAudio("wallOpen");
 
 

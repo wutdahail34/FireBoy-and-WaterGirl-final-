@@ -20,7 +20,7 @@ function setup() {
 
 }
 
-function draw() {
+function draw() {//infimite  loop
   noFill();
   if (isDrawing) {
     stroke(currentPlayer === 1 ? [255, 0, 0] : [0, 0, 255]);
