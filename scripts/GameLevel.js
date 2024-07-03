@@ -125,7 +125,7 @@ class GameLevel extends Phaser.Scene {
 
 
   
-      const groundLevel = this.cameras.main.height - 600;
+      const groundLevel = this.cameras.main.height - 50;
 
 
 
@@ -223,10 +223,10 @@ class GameLevel extends Phaser.Scene {
 
 
       // for development only
-      this.dimensionsText = this.add.text(400, 40, "Dimensions", {
+      /*this.dimensionsText = this.add.text(400, 40, "Dimensions", {
         fontSize: "24px",
         fill: "#00f",
-      }).setScrollFactor(0).setDepth(5);
+      }).setScrollFactor(0).setDepth(5);*/
 
 
 
@@ -246,13 +246,14 @@ class GameLevel extends Phaser.Scene {
       this.cursors = this.input.keyboard.createCursorKeys();
       this.cameras.main.startFollow(this.character1, true);
       this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-  
-      this.physics.world.createDebugGraphic();
-      layer.setDepth(1);
+     layer.setDepth(1);
       this.character1.setDepth(2);
       this.character2.setDepth(2);
+
+
+     /* this.physics.world.createDebugGraphic();
       this.character1.setDebug(true, true, 0xff0000);
-      this.character2.setDebug(true, true, 0xff0000);
+      this.character2.setDebug(true, true, 0xff0000);*/
   
       this.createCoins();
       this.createHearts();
@@ -349,30 +350,11 @@ class GameLevel extends Phaser.Scene {
     }
 
 
-  /*handleCollisionCharacter1(character, wallBtn) {
 
-    console.log("sadasd");
-    this.isColliding = false;
-
-  
+    
 
 
-  }
 
-  handleCollisionCharacter2(character, wallBtn) {
-
-    console.log("sadasd");
-    this.isColliding = false;
-
-       /*   this.wallLinks.forEach((item)=>{
-            if(item[0] == wallBtn){
-              item[2] =1;
-            }
-          }
-  )*//*
-
-
-  }*/
 
 
   
@@ -541,7 +523,7 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
 
 
 
-      this.dimensionsText.setText(Math.floor(this.character2.x) + " x "+Math.floor(this.character2.y))
+      //this.dimensionsText.setText(Math.floor(this.character2.x) + " x "+Math.floor(this.character2.y))
 
 
       
