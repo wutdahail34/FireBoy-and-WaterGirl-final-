@@ -125,7 +125,7 @@ class GameLevel extends Phaser.Scene {
 
 
   
-      const groundLevel = this.cameras.main.height - 600;
+      const groundLevel = this.cameras.main.height - 60;
 
 
 
