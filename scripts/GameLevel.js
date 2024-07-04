@@ -57,6 +57,7 @@ class GameLevel extends Phaser.Scene {
       this.load.image("wall", "./assets/images/Wall.png");
       this.load.image("wallBtn", "./assets/images/wallBtn.png");
       this.load.image("heart" , "../assets/images/heart.png")
+      this.load.image("door" , "../assets/images/door.png")
       
       this.load.audio("wallOpen" , "../assets/audio/wallOpen.mp3")
       this.load.audio("wallClose" , "../assets/audio/wallClose.mp3")
@@ -125,7 +126,7 @@ class GameLevel extends Phaser.Scene {
 
 
   
-      const groundLevel = this.cameras.main.height - 50;
+      const groundLevel = this.cameras.main.height - 600;
 
 
 
@@ -213,8 +214,8 @@ class GameLevel extends Phaser.Scene {
   
       this.score = 0;
   
-      this.scoreText = this.add.text(16, 10, "Score: 0", {
-        fontSize: "24px",
+      this.scoreText = this.add.text(26, 4, "Score: 0", {
+        fontSize: "26px",
         fill: "#fff",
       }).setScrollFactor(0).setDepth(5);
 
@@ -228,6 +229,17 @@ class GameLevel extends Phaser.Scene {
         fill: "#00f",
       }).setScrollFactor(0).setDepth(5);*/
 
+      if(this.registry.get("currentLevel")  === undefined){
+        this.registry.set("currentLevel", 1);
+        }
+      let currentLevel = this.registry.get("currentLevel") ;
+      let door; 
+      if(currentLevel > 1){
+        door = this.add.image(75, 96, 'door');
+      }else{ door = this.add.image(75, 64, 'door');}  
+
+      door.setDisplaySize(100, 76); 
+      door.setDepth(0);
 
 
 
@@ -235,13 +247,6 @@ class GameLevel extends Phaser.Scene {
 
 
 
-  
-      /*this.updateScoreEvent = this.time.addEvent({
-        delay: 100,
-        callback: () => this.updateScore(),
-        callbackScope: this,
-        loop: true,
-      });*/
   
       this.cursors = this.input.keyboard.createCursorKeys();
       this.cameras.main.startFollow(this.character1, true);
@@ -539,7 +544,7 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
       if (!useDefault  && imgData) {
         return imgData;
       }
-      return "assets/firecharacter.png";
+      return "assets/images/firecharacter.png";
     }
   
     loadImageFromLocalStorage2(key) {
@@ -547,7 +552,7 @@ if (x1 > item[0]-17   &&   x1 <= item[0]+17  &&   y1 > item[1]-8   &&    y1 <= i
       if (!useDefault  && imgData) {
         return imgData;
       }
-      return "assets/watercharacter.png";
+      return "assets/images/watercharacter.png";
     }
   
   
